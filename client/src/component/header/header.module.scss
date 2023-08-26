@@ -1,0 +1,24 @@
+.container {
+    min-height: 50px;
+    display: flex;
+    padding-left: 1rem;
+    align-items: center;
+    .menu_item {
+        a{
+            color: rgb(141, 141, 141);
+            font-size: 1.2rem;
+            text-decoration: none;
+        }
+        height: 1.2rem;
+        border-radius: 0.2rem;
+        padding: 0.2rem 0.7rem;
+        &.menu_item:hover{
+            background-color: rgb(245, 245, 245);
+        }
+    }
+    .chooseOption {
+        a{
+            color: rgb(0, 0, 0);
+        }
+    }
+}
