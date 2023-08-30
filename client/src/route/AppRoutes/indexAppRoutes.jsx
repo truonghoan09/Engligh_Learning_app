@@ -3,7 +3,8 @@ import PATH from "../../config/routePathConfig"
 import Layout1 from "../../layout/layout1"
 import Home from "../../page/Home/indexHome"
 import IRREGULAR_VERBS from "../../page/irregularVerbs/indexIrregularVerb"
-import AddWord from "../../module/addWord/indexAddWord"
+import CreateJson from "../../module/createJson/indexCreateJson"
+import AddIrregularVerbs from "../../module/addIrregularVerbs/indexAddIrregularVerbs"
 
 const AppRoutes = () => {
     const element = useRoutes([
@@ -28,12 +29,22 @@ const AppRoutes = () => {
             ]
         },
         {
-            path: PATH.ADD_WORD,
+            path: PATH.CREATE_JSON,
             element: <Layout1 />,
             children: [
                 {
                     index: true,
-                    element: <AddWord />,
+                    element: <CreateJson />,
+                }
+            ]
+        },
+        {
+            path: PATH.ADD_IRREGULAR_VERBS,
+            element: <Layout1 />,
+            children: [
+                {
+                    index: true,
+                    element: <AddIrregularVerbs />,
                 }
             ]
         },

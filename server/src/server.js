@@ -1,10 +1,12 @@
 import express from "express";
 import { initializeApp } from "firebase/app";
-import { getDatabase } from "firebase/database";
 import configViewEngine from "./config/viewEngine"
 import initWebRoutes from "./route/web";
+import http from 'http';
+import socketIo from 'socket.io'; 
 
 require("dotenv").config();
+var cors = require('cors')
 
 const app = express();
 
@@ -21,15 +23,16 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const database = initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
+
 
 // Initialize Realtime Database and get a reference to the service
 // const databaseURL = 'http://127.0.0.1:9000/'; // Đổi URL này để trỏ đến Emulator
 // const db = getDatabase(databaseURL);
-const db = getDatabase(database);
 
 
 app.use(express.json());
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
 configViewEngine(app);
@@ -37,8 +40,23 @@ initWebRoutes(app);
 
 const port = process.env.PORT || 6969;
 
-module.exports = db;
 
 app.listen(port, () => {
   console.log("Server is running at port: ", port);
+});
+
+const server = http.createServer(app);
+
+export const io = socketIo(server);
+
+io.on('connection', (socket) => {
+  console.log('A client connected');
+
+  socket.on('send-data-to-server', (data) => {
+      console.log('Received data from client:', data);
+  });
+
+  socket.on('disconnect', () => {
+      console.log('A client disconnected');
+  });
 });

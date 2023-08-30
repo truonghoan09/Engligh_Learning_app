@@ -1,5 +1,5 @@
 
-import WriteAnObjectServices from "../services/writeAnObjectServices"
+import AddIrregularVerbs from "../services/addIrregularVerbs";
 const getHomePage = (req, res) => {
     return res.send("Server is Running!");
     };
@@ -8,13 +8,13 @@ const getHomePage = (req, res) => {
 //     let result = await CreateUserServices(data.data);
 //     return await res.status(200).json(result); 
 // }
-const writeAnObject = async (req, res) => {
+const addIrregularVerbs = async (req, res) => {
     let data = req.body;
-    let result = await WriteAnObjectServices(data)
+    let result = await AddIrregularVerbs(data)
     return await res.status(200).json(result);
 }
     
 module.exports = {
     getHomePage: getHomePage,
-    writeAnObject: writeAnObject,
+    addIrregularVerbs: addIrregularVerbs,
 };

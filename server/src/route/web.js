@@ -5,7 +5,7 @@ let router = express.Router();
 
 let initWebRoutes = (app) => {
   router.get("/", homeController.getHomePage);
-  router.post('/api/write_an_object', homeController.writeAnObject);
+  router.post('/api/add_irregularverbs', homeController.addIrregularVerbs);
   return app.use("/", router);
 
 };
