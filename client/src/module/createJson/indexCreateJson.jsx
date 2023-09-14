@@ -3,6 +3,8 @@ import styles from "./createJson.module.scss";
 import {useDispatch, useSelector} from "react-redux";
 import { uploadAndGetURL } from "../../redux/action";
 import LoadingModal from "../../component/loadingModal/indexLoading";
+import ModalNotice from "../../component/modalNotice/modalNotice";
+
 
 const CreateJson = () => {
 
@@ -11,6 +13,7 @@ const CreateJson = () => {
     const [verb1, setVerb1] = useState('');
     const [verb2, setVerb2] = useState('');
     const [verb3, setVerb3] = useState('');
+    const [meaning, setMeaning] = useState('');
 
     const [IPA_verb1, setIPA_verb1] = useState('');
     const [IPA_verb2, setIPA_verb2] = useState('');
@@ -29,6 +32,9 @@ const CreateJson = () => {
 
     const [isCopied, setIsCopied] = useState(false);
     //=======================================//
+
+    const [notice, setnotice] = useState({isshow: false, message: "", severity: "",type: ""});
+
     
     const audioRef1 = useRef(null)
     const audioRef2 = useRef(null)
@@ -41,12 +47,12 @@ const CreateJson = () => {
             dispatch(uploadAndGetURL(soundVerb2, '2'));
             dispatch(uploadAndGetURL(soundVerb3, '3'));
         } else {
-            console.log('Nhập cho đủ dữ liệu');
+            setnotice({isshow: true, message: "Vui lòng nhập đầy đủ tất cả các ô input!", severity: "Thông Báo", type: "Notification Just Noitce"})
         }
     }
 
     const checkVal = () => {
-        return (verb1 && verb2 && verb3 && IPA_verb1 && IPA_verb2 && IPA_verb3 && soundVerb1 && soundVerb2 && soundVerb3);
+        return (verb1 && verb2 && verb3 && IPA_verb1 && IPA_verb2 && IPA_verb3 && soundVerb1 && soundVerb2 && soundVerb3 && meaning);
     }
 
     const dispatch = useDispatch();
@@ -106,6 +112,7 @@ const CreateJson = () => {
                 "Sound": URL_Verb1,
                 "relative2": verb2,
                 "relative3": verb3,
+                "meaning" : meaning,
             },
             [verb2] : {
                 "status": "V2",
@@ -113,6 +120,7 @@ const CreateJson = () => {
                 "Sound": URL_Verb2,
                 "relative1": verb1,
                 "relative3": verb3,
+                "meaning" : meaning,
             },
             [verb3] : {
                 "status": "V3",
@@ -120,21 +128,22 @@ const CreateJson = () => {
                 "Sound": URL_Verb3,
                 "relative1": verb1,
                 "relative2": verb2,
+                "meaning" : meaning,
             },
         })
     }
 
-    const handlePlaySound = (ref) => {
-        if (ref===1) {
-            audioRef1.current.play();
-        } else {
-            if (ref===2) {
-                audioRef2.current.play();
-            } else {
-                audioRef3.current.play();
-            }
-        }
-    }
+    // const handlePlaySound = (ref) => {
+    //     if (ref===1) {
+    //         audioRef1.current.play();
+    //     } else {
+    //         if (ref===2) {
+    //             audioRef2.current.play();
+    //         } else {
+    //             audioRef3.current.play();
+    //         }
+    //     }
+    // }
     
     const handleClickCopy = (JSON) => {
         let data = JSON.slice(1, JSON.length-1);
@@ -149,6 +158,7 @@ const CreateJson = () => {
 
     return(
         <>
+            <ModalNotice show={notice.isshow} onHide={()=>setnotice(!notice.isshow)} message={notice.message} severity={notice.severity} type={notice.type}/>
             <div className={styles.container}>
                 <div className={styles.verb}>
                     <div className={styles.input}>
@@ -195,9 +205,13 @@ const CreateJson = () => {
                     </div>
 
                 </div>
+                <div className={styles.meaning}>
+                    <label>Meaning</label>
+                    <input type="text" className={styles.input} onChange={(e) => setMeaning(e.target.value)}/>
+                </div>
                 <div className={styles.submitButton} onClick={() => {handleClickCreateJSON()}}>Create JSON</div>
                 
-                {URL_Verb1 &&
+                {/* {URL_Verb1 &&
                     <>
                         <div onClick={()=> handlePlaySound(1)} className={styles.word}>{verb1}</div>
                         <audio ref={audioRef1} className={styles.audioControl} controls>
@@ -220,7 +234,7 @@ const CreateJson = () => {
                             <source id="audioSource" src={URL_Verb3} type="audio/mpeg"/>
                         </audio>
                     </>
-                }
+                } */}
                 {data && 
                     <>
                         <div className={styles.output}>Your JSON is: {JSON.stringify(data)}</div>

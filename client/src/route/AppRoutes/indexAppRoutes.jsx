@@ -2,7 +2,7 @@ import { useRoutes } from "react-router-dom"
 import PATH from "../../config/routePathConfig"
 import Layout1 from "../../layout/layout1"
 import Home from "../../page/Home/indexHome"
-import IRREGULAR_VERBS from "../../page/irregularVerbs/indexIrregularVerb"
+import IrregularVerb from "../../page/irregularVerbs/indexIrregularVerb"
 import CreateJson from "../../module/createJson/indexCreateJson"
 import AddIrregularVerbs from "../../module/addIrregularVerbs/indexAddIrregularVerbs"
 
@@ -24,7 +24,7 @@ const AppRoutes = () => {
             children: [
                 {
                     index: true,
-                    element: <IRREGULAR_VERBS />,
+                    element: <IrregularVerb />,
                 }
             ]
         },

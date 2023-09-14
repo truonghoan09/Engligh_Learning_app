@@ -3,41 +3,44 @@ import styles from './addIrregularVerbs.module.scss'
 import { useDispatch, useSelector } from 'react-redux';
 import LoadingModal from '../../component/loadingModal/indexLoading';
 import { addIrregularVerbs } from '../../redux/action';
-import io from 'socket.io-client';
 
 const  AddIrregularVerbs = () => {
-    const generateUniqueId = () => {
-        const randomId = Math.floor(10000 + Math.random() * 90000);
-        return randomId.toString();
-    }
-    const socket = io("http://localhost:8008/");
-
-    const handleClickSendDataToServer = () => {
-        socket.emit('send-data-to-server', { message: 'Hello, Server!' });
-    }
+   
 
     const [JSONtext, setJSONtext] = useState('');
     const [cacheMemory, setCacheMemory] = useState('');
     const [sendData, setSendData] = useState(false);
 
 
-    const handleClickResetCacheMemory = () => {
+    const handleClickResetAll = () => {
         setCacheMemory('');
+        localStorage.removeItem('JSON_from_addIrregularVerbs')
+    }
+
+    const handleResetLocalstorage = () => {
+        localStorage.removeItem('JSON_from_addIrregularVerbs');
     }
 
     const handleClickSaveToCacheMemory = () => {
-        if (JSONtext) {
-            setCacheMemory(cacheMemory + JSONtext);
+        if (JSONtext && cacheMemory!== '') {
+            setCacheMemory(cacheMemory + "," + JSONtext);
             setJSONtext('');
+        } else {
+            if (JSONtext && cacheMemory === '') {
+                setCacheMemory(JSONtext);
+                setJSONtext('');
+            }
         }
     }
 
     const handleClickAddAllToDataBase = () => {
         if (JSONtext !== '') {
             handleClickSaveToCacheMemory();
+            handleResetLocalstorage();
             setSendData(true);
         } else {
             if (cacheMemory !== '') {
+                handleResetLocalstorage();
                 setSendData(true);
             }
         }
@@ -49,22 +52,25 @@ const  AddIrregularVerbs = () => {
     const error = useSelector (state => state.addIrregularVerbsReducer.error);
 
     useEffect(() => {
-        // Lắng nghe sự kiện "overwrite-prompt" từ server
-        socket.on('overwrite-prompt', ({ key }) => {
-            const shouldOverwrite = window.confirm(`Data for key ${key} already exists. Do you want to overwrite?`);
-            if (shouldOverwrite) {
-                // Gửi lại thông điệp đồng ý ghi đè lên server
-                socket.emit('overwrite-confirmed', { key });
-            }
-        });
-
         if (sendData) {
             console.log(cacheMemory);
-            dispatch(addIrregularVerbs(cacheMemory, userId));
+            dispatch(addIrregularVerbs(cacheMemory));
             setCacheMemory('');
             setSendData(false);
         }
-    }, [sendData, socket]);
+    }, [sendData]);
+
+    useEffect(() => {
+        if (localStorage.getItem("JSON_from_addIrregularVerbs")) {
+            setCacheMemory(localStorage.getItem("JSON_from_addIrregularVerbs"));
+        }
+    }, [])
+
+    useEffect(() => {
+        if (cacheMemory !== '' && cacheMemory) {
+            localStorage.setItem('JSON_from_addIrregularVerbs', cacheMemory);
+        }
+    }, [cacheMemory])
 
     return (
         <>
@@ -89,14 +95,11 @@ const  AddIrregularVerbs = () => {
                     </div>
                     <div 
                         className={styles.button}
-                        onClick={() => handleClickResetCacheMemory()}>
+                        onClick={() => handleClickResetAll()}>
                         Reset cache memory
                     </div>
                 </div>
             </div>
-            <button onClick={() => handleClickSendDataToServer()}>
-                Send Data to Server
-            </button>
         </>
     )
 }

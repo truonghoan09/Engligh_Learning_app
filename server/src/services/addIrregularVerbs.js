@@ -1,19 +1,13 @@
-const { ref, get, set, getDatabase } = require('firebase/database');
-const { userSockets } = require('../server');
+const { ref, get, set, getDatabase, update } = require('firebase/database');
 
 const AddIrregularVerbs = async (data) => {
     const db = getDatabase();
-    console.log(data);
     
-    const userId = data.userId;
-    console.log(userId);
-
     try {
         const objectRef = ref(db, 'irregularVerbs'); // Đổi thành đường dẫn thực tế của bạn
         const objectSnapshot = await get(objectRef);
         
         const newData = JSON.parse(`{${data.data}}`);
-        console.log(newData);
 
         if (!objectSnapshot.exists()) {
             // Nếu không tồn tại irregularVerbs, tạo mới và thêm data vào
@@ -24,15 +18,15 @@ const AddIrregularVerbs = async (data) => {
             for (const key in newData) {
                 if (!objectData[key]) {
                     // Nếu irregularVerbs đã tồn tại nhưng key không tồn tại, thêm data vào
-                    await update(objectRef, { [key]: newData[key] });
+                    await update(objectRef, {[key]: newData[key]});
                     console.log(`Data for key ${key} added to existing object`);
                 } else {
-    
-                    const socket = io;
-                    if (socket) {
-                        socket.emit('overwrite-prompt', { key });
+                    console.log(`Data for key ${key} already exists. Skipping.`);
+                    // const socket = io;
+                    // if (socket) {
+                    //     socket.emit('overwrite-prompt', { key });
 
-                    }
+                    // }
                     //Chờ phản hồi từ client rồi xử lý tiếp
 
                     // const shouldOverwrite = await askUserShouldOverwrite(key);

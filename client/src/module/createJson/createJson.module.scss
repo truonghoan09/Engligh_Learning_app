@@ -20,15 +20,26 @@
             }
         }
     }
+    .meaning {
+        padding-left: 2rem;
+        padding-right: 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.1rem;
+        .input {
+            height: 1.3rem;
+            padding: 0rem 0.5rem;
+        }
+    }
     .submitButton {
         grid-column: 3;
         cursor: pointer;
         border: 1px solid rgb(43, 126, 227);
         border-radius: 0.2rem;
         height: 1.5rem;
+        line-height: 1.5rem;
         width: 7rem;
         text-align: center;
-        line-height: 1.5rem;
         background-color: rgb(43, 126, 227);
         color: white;
         scale: 1.2;

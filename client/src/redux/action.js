@@ -1,6 +1,6 @@
 import {storage} from "../App.jsx"
 import { getDownloadURL, ref, uploadBytes} from "firebase/storage";
-import { ADD_IRREGULAR_VERBS_FAILURE, ADD_IRREGULAR_VERBS_REQUEST, ADD_IRREGULAR_VERBS_SUCCESS, GET_URL_FILE_FAILURE, UPLOAD_AND_GET_FILE_SUCCESS, UPLOAD_FILE_FAILURE, UPLOAD_FILE_REQUEST } from "./type.js";
+import { ADD_IRREGULAR_VERBS_FAILURE, ADD_IRREGULAR_VERBS_REQUEST, ADD_IRREGULAR_VERBS_SUCCESS, GET_DATA_IRREGULAR_VERBS_PAGE_FAILURE, GET_DATA_IRREGULAR_VERBS_PAGE_REQUEST, GET_DATA_IRREGULAR_VERBS_PAGE_SUCCESS, GET_URL_FILE_FAILURE, UPLOAD_AND_GET_FILE_SUCCESS, UPLOAD_FILE_FAILURE, UPLOAD_FILE_REQUEST } from "./type.js";
 import axios from "axios";
 
 export const uploadAndGetURL = (file, status) => async (dispatch) => {
@@ -35,6 +35,24 @@ export const addIrregularVerbs = (data, userId) => {
             dispatch({type: ADD_IRREGULAR_VERBS_SUCCESS, payload: response.data})
         } catch (error) {
             dispatch({type: ADD_IRREGULAR_VERBS_FAILURE , error: error.message})
+        }
+    }
+};
+
+
+
+export const getDataIrregularVerbsPage = () => {
+	return async (dispatch) => {
+        dispatch({type: GET_DATA_IRREGULAR_VERBS_PAGE_REQUEST})
+        try {
+            let response = await axios ({
+                method: 'get',
+                url: 'http://localhost:8008/api/get_irregularverbs_page',
+                responseType: 'json',
+            })
+            dispatch({type: GET_DATA_IRREGULAR_VERBS_PAGE_SUCCESS, payload: response.data, subPayload: response.subData})
+        } catch (error) {
+            dispatch({type: GET_DATA_IRREGULAR_VERBS_PAGE_FAILURE , error: error.message})
         }
     }
 };
