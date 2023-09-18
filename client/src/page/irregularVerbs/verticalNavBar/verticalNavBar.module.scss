@@ -1,0 +1,26 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    background-color: rgb(232, 232, 232);
+    position: fixed;
+    height: 90vh;
+    width: 13.5vw;
+    user-select: none;
+    .menu_item {
+        color: rgb(141, 141, 141);
+        font-size: 1rem;
+        text-decoration: none;
+        height: 1rem;
+        border-radius: 0.2rem;
+        padding: 0.2rem 0.7rem;
+        &.menu_item:hover{
+            background-color: rgb(245, 245, 245);
+        }
+    }
+    .chooseOption {          
+        background-color: rgb(255, 255, 255);  
+        border-radius: 0;
+        color: rgb(0, 0, 0);
+    }
+}

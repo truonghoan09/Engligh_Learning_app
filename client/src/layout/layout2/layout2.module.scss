@@ -1,0 +1,13 @@
+.container {
+    display: grid;
+    width: 92vw;
+    max-height: 90vh;
+    grid-template-columns: 15% 90%; 
+    padding-top: 80px;
+    .outletContainer {
+        position: relative;
+        left: 215px;
+        width: 84vw;
+    }
+    
+}

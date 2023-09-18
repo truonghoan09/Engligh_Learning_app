@@ -1,8 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
 import {useEffect, useRef, useState} from 'react';
 import styles from './irregularVerb.module.scss';
-import LoadingModal from '../../component/loadingModal/indexLoading';
-import { getDataIrregularVerbsPage } from '../../redux/action';
+import LoadingModal from '../../../component/loadingModal/indexLoading';
+import { getDataIrregularVerbsPage } from '../../../redux/action';
+import { Link } from 'react-router-dom';
 
 const IrregularVerb = () => {
 
@@ -136,58 +137,60 @@ const IrregularVerb = () => {
 
     return(
         <>
+            <div className={styles.containerPage}>
             {loading && <LoadingModal />}
-            <div className={styles.container}>
-                <div className={styles.searchContainer}>Search Word
-                    <div className={styles.inputArea}>
-                        <input type='text' placeholder='Enter a word in English' 
-                            onChange={(e) => handleSetSearchword(e.target.value)}
-                        />
+                <div className={styles.containerContent}>
+                    <div className={styles.searchContainer}>Search Word
+                        <div className={styles.inputArea}>
+                            <input type='text' placeholder='Enter a word in English' 
+                                onChange={(e) => handleSetSearchword(e.target.value)}
+                                />
+                        </div>
                     </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th className={styles.oridinalNumber}>Ordinal number</th>
+                                <th className={styles.infinitiveVerb}>Infinitive Verb</th>
+                                <th className={styles.pastTense}>Past Tense</th>
+                                <th className={styles.pastParticiple}>Past participle</th>
+                                <th className={styles.meaning}>Meaning</th>
+                            </tr>
+                        </thead>
+                        {result && 
+                            <tbody>
+                                {
+                                    result.map(( value , index) => { 
+                                        return(
+                                            <tr>
+                                                <td>{index+1}</td>
+                                                <td className={styles.word} onClick={()=> handlePlaySound(`${getverb(value, 1)}1`)}>{getverb(value, 1) }
+                                                    <div className={styles.ipa}>{getIPA(value, 1)}</div>
+                                                </td>
+                                                <audio ref={(el) => (audioRefs.current[`${getverb(value, 1)}1`] = el)} className={styles.audioControl} controls>
+                                                    <source id="audioSource" src={getURLsound(value, 1)} type="audio/mpeg"/>
+                                                </audio>
+                                                <td className={styles.word} onClick={()=> handlePlaySound(`${getverb(value, 2)}2`)}>{getverb(value, 2)}
+                                                    <div className={styles.ipa}>{getIPA(value, 2)}</div>
+                                                </td>
+                                                <audio ref={(el) => (audioRefs.current[`${getverb(value, 2)}2`] = el)} className={styles.audioControl} controls>
+                                                    <source id="audioSource" src={getURLsound(value, 2)} type="audio/mpeg"/>
+                                                </audio>
+                                                <td className={styles.word} onClick={()=> handlePlaySound(`${getverb(value, 3)}3`)}>{getverb(value, 3)}
+                                                    <div className={styles.ipa}>{getIPA(value, 3)}</div>
+                                                </td>
+                                                <audio ref={(el) => (audioRefs.current[`${getverb(value, 3)}3`] = el)} className={styles.audioControl} controls>
+                                                    <source id="audioSource" src={getURLsound(value, 3)} type="audio/mpeg"/>
+                                                </audio>
+                                                <td className={styles.word}>{getMeaning(value)}</td>
+                                            </tr>
+                                        )
+                                    })
+                                }
+                            </tbody>
+                        } 
+                    </table>
                 </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th className={styles.oridinalNumber}>Ordinal number</th>
-                            <th className={styles.infinitiveVerb}>Infinitive Verb</th>
-                            <th className={styles.pastTense}>Past Tense</th>
-                            <th className={styles.pastParticiple}>Past participle</th>
-                            <th className={styles.meaning}>Meaning</th>
-                        </tr>
-                    </thead>
-                    {result && 
-                        <tbody>
-                            {
-                                result.map(( value , index) => { 
-                                    return(
-                                        <tr>
-                                            <td>{index+1}</td>
-                                            <td className={styles.word} onClick={()=> handlePlaySound(`${getverb(value, 1)}1`)}>{getverb(value, 1) }
-                                                <div className={styles.ipa}>{getIPA(value, 1)}</div>
-                                            </td>
-                                            <audio ref={(el) => (audioRefs.current[`${getverb(value, 1)}1`] = el)} className={styles.audioControl} controls>
-                                                <source id="audioSource" src={getURLsound(value, 1)} type="audio/mpeg"/>
-                                            </audio>
-                                            <td className={styles.word} onClick={()=> handlePlaySound(`${getverb(value, 2)}2`)}>{getverb(value, 2)}
-                                                <div className={styles.ipa}>{getIPA(value, 2)}</div>
-                                            </td>
-                                            <audio ref={(el) => (audioRefs.current[`${getverb(value, 2)}2`] = el)} className={styles.audioControl} controls>
-                                                <source id="audioSource" src={getURLsound(value, 2)} type="audio/mpeg"/>
-                                            </audio>
-                                            <td className={styles.word} onClick={()=> handlePlaySound(`${getverb(value, 3)}3`)}>{getverb(value, 3)}
-                                                <div className={styles.ipa}>{getIPA(value, 3)}</div>
-                                            </td>
-                                            <audio ref={(el) => (audioRefs.current[`${getverb(value, 3)}3`] = el)} className={styles.audioControl} controls>
-                                                <source id="audioSource" src={getURLsound(value, 3)} type="audio/mpeg"/>
-                                            </audio>
-                                            <td className={styles.word}>{getMeaning(value)}</td>
-                                        </tr>
-                                    )
-                                })
-                            }
-                        </tbody>
-                    } 
-                </table>
             </div>
         </>
         
