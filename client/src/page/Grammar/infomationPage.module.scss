@@ -1,0 +1,239 @@
+.container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-bottom: 5rem;
+    .titlePage {
+        text-align: center;
+        color: rgb(255, 58, 58);
+    }
+    .tab {
+        display: inline-block;
+        margin-left: 50px;
+    }
+    .title1 {
+        font-weight: 600;
+        font-size: 25px;
+        margin-top: 5px;
+        margin-right: 5px;
+
+    }
+    .title2 {
+        font-weight: 600;
+        font-size: 20px;
+        margin-left: 50px;
+        margin-top: 5px;
+        margin-right: 5px;
+    }
+    .title3 {
+        font-weight: 600;
+        font-size: 18px;
+        margin-left: 100px;
+        margin-top: 5px;
+        margin-right: 5px;
+
+    }
+    .content1 {
+        font-size: 18px;
+        margin-left: 50px;
+    }
+
+    .content2{
+        font-size: 18px;
+        margin-left: 75px;
+    }
+    .content3{
+        font-size: 18px;
+        margin-left: 100px;
+    }
+    .content4{
+        font-size: 18px;
+        margin-left: 150px;
+    }
+    .content5{
+        font-size: 18px;
+        margin-left: 200px;
+    }
+    .important {
+        font-weight: 600;
+        color: rgb(55, 96, 199);
+    }
+    .table, td, th{
+        border: 1px solid black;
+        border-collapse: collapse;
+        text-align: center;
+        padding: 0.5rem 1rem;
+        th {
+            background-color: rgb(139, 227, 245);
+            color: white;
+        }
+    }
+    .customTable1{
+        //dùng ở chỗ so sánh Hiện tại hoàn thành với quá khứ đơn trong page Present Perfect Tense
+        width: 45rem;
+        .text_left {
+            text-align:  left !important;
+        }
+        .stt{
+            width: 30px;
+        }
+        .col1{
+            width: 55%;
+        }
+    }
+    .customTable2{
+        //dùng ở chỗ so sánh Thì Hiện tại hoàn thành và Thì Hiện tại hoàn thành tiếp diễn ở 
+        //page Present Perfect Continuous Tense
+        width: 60rem;
+        .text_left {
+            text-align:  left !important;
+        }
+        .stt{
+            width: 30px;
+        }
+        .col1{
+            width: 50%;
+        }
+    }
+    .customTable3{
+        //dùng ở chỗ các ví dụ trong thêm s/es
+        //page About (s/es)
+        width: 40rem;
+        .text_left {
+            text-align:  left !important;
+        }
+        .stt{
+            width: 30px;
+        }
+        .col1{
+            width: 50%;
+        }
+    }
+    .table {
+        tr:hover {
+            background-color: rgb(179, 241, 250);
+            th {
+                background-color: rgb(139, 227, 245);
+                color: white;
+            }
+            .noChange{
+                background-color: white;
+            }
+        }
+    }
+    th {
+        font-size: 20px;
+        padding: 5px 0;
+    }
+    .table {
+        margin: 0 auto;
+        margin-bottom: 2rem;
+    }
+    .col1 {
+        width: 15rem;
+    }
+    .noBotandTop {
+        border-bottom: none;
+        border-top: none;
+        padding: 0.4rem 0;
+    }
+    .noTop {
+        border-top: none;
+        padding: 0.4rem 0;
+    }
+    .noBot {
+        border-bottom: none;
+        padding: 0.4rem 0;
+    }
+    .noBot,.noBotandTop, .noTop {
+        width: 30rem;
+    }
+    // .noBot:hover, .noBotandTop:hover, .noTop:hover {
+    //     background-color: rgb(213, 246, 235);
+    //     cursor: pointer;
+    // }
+    .usePastSimpleTense{
+        li{
+            padding: 5px 0;
+        }
+    }
+    .linkPage{
+        text-decoration: none;
+        cursor: pointer;
+        font-weight: 900;
+        color: rgb(39, 234, 162);
+    }
+    .linkPage:hover{
+        color: rgb(199, 136, 55);
+    }
+    .toc {
+        width: 45rem;
+        padding: 1rem 2rem;
+        background-color: rgb(221, 225, 253);
+        font-size: 20px;
+        margin: 1rem 2rem;
+        .toc1 {
+            margin-left: 40px;
+            li a {
+                font-size: 17px;
+                text-decoration: none;
+                color: rgb(85, 85, 248);
+                &a:active {
+                    color: rgb(85, 85, 248);
+                }
+                .toc2 {
+                    padding-left: 80px;
+                    li a{
+                        font-size: 17px;
+                        text-decoration: none;
+                        color: rgb(85, 85, 248);
+                        &a:active {
+                            color: rgb(85, 85, 248);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .listGap {
+        display: flex;
+        flex-direction: column;
+        gap: 10px
+    }
+    .smallNote {
+        font-size: 15px;
+        
+    }
+    .regularNote {
+        font-style: italic;
+    }
+    .noteBorder{
+        border-left: 2px blue solid;
+        background-color: rgb(238, 247, 255);
+        display: flex;
+        width: 40rem;
+        height: 6rem;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+        .text{
+            text-align: center;
+        }
+    }
+    .noteBorder1{
+        border-left: 2px blue solid;
+        background-color: rgb(238, 247, 255);
+        display: flex;
+        width: 50rem;
+        height: 7rem;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+        .text{
+            text-align: center;
+        }
+    }
+    .highlightSection {
+        background-color: rgb(251, 251, 141);
+    }
+     
+}

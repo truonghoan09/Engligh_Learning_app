@@ -1,11 +1,17 @@
 import { Link } from 'react-router-dom';
-import styles from './verticalNavBar.module.scss' 
+import styles from './verticalNavBarIrregularVerbs.module.scss' 
 
-const VerticalNavBar = () => {
+const VerticalNavBarIrregularVerbs = () => {
     return  (
         <>
             <div className={styles.container}>
                 
+                <Link
+                className={`${styles.menu_item} ${location.pathname === "/irregular_verbs/information" ? styles.chooseOption: ''}`} 
+                to={"/irregular_verbs/information"}>
+                    Information
+                </Link>
+
                 <Link
                 className={`${styles.menu_item} ${location.pathname === "/irregular_verbs/dictionary" ? styles.chooseOption: ''}`} 
                 to={"/irregular_verbs/dictionary"}>
@@ -37,4 +43,4 @@ const VerticalNavBar = () => {
     )
 }
 
-export default VerticalNavBar;
+export default VerticalNavBarIrregularVerbs;
