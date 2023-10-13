@@ -2,6 +2,7 @@ import styles from '../../infomationPage.module.scss';
 import {Link} from 'react-router-dom';
 import ScrollFunc from '../../scrollFunc';
 import ScrollToTop from '../../../../component/scrollToTopButton/indexScrollToTop';
+import PATH from '../../../../config/routePathConfig';
 
 const PresentPerfectContinuousTense = () => {
     const I = 'Khái niệm thì hiện tại hoàn thành tiếp diễn'
@@ -104,10 +105,10 @@ const PresentPerfectContinuousTense = () => {
                     <div className={styles.title1} id='sectionIV'>IV. {IV}</div>
                     
                         <p className={styles.title2}><span className={styles.tab} id='sectionIV_1'/>1. {IV_1}</p>
-                        <p className={styles.content3}>Có thể xem lại ở phần IV/1 của <Link className={styles.linkPage} to={"/grammar/tense/present_perfect_tense/#sectionIV_1"}>Present Pefect Tense</Link></p>
+                        <p className={styles.content3}>Có thể xem lại ở phần <Link className={styles.linkPage} to={PATH.GRAMMAR_TENSE_PRESENT_PERFECT + "/#sectionIV_1"}>IV/1 của Present Pefect Tense</Link></p>
 
                         <p className={styles.title2}><span className={styles.tab} id='sectionIV_2'/>2. {IV_2}</p>
-                        <p className={styles.content3}>Có thể xem lại ở phần IV của <Link className={styles.linkPage} to={"/grammar/tense/present_continuous_tense/#sectionIV"}>Present Continuous Tense</Link></p>
+                        <p className={styles.content3}>Có thể xem lại ở phần <Link className={styles.linkPage} to={PATH.GRAMMAR_TENSE_PRESENT_CONTINUOUS + "/#sectionIV"}>IV của Present Continuous Tense</Link></p>
                                                                                                           
 
 
@@ -176,7 +177,7 @@ const PresentPerfectContinuousTense = () => {
                         </table>
                         <p className={styles.content3}>
                             <div className={styles.regularNote}><span className={styles.important}>Note 1:</span> Khi được sử dụng với những động từ như “live/ work/ study”, việc sử dụng 1 trong 2 thì đều không thay đổi nghĩa của câu.</div>
-                            <div className={styles.regularNote}><span className={styles.important}>Note 2:</span> Khi trong câu có đề cập đến thời gian, <span className={styles.important}>hiện tại hoàn thành tiếp diễn nhấn mạnh về thời gian</span> hơn. Trong khi thì <Link className={styles.linkPage} to='/grammar/present_perfect_tense/#section0'>hiện tại hoàn thành</Link> <span className={styles.important}>mang tính trung lập</span></div>
+                            <div className={styles.regularNote}><span className={styles.important}>Note 2:</span> Khi trong câu có đề cập đến thời gian, <span className={styles.important}>hiện tại hoàn thành tiếp diễn nhấn mạnh về thời gian</span> hơn. Trong khi thì <Link className={styles.linkPage} to={PATH.GRAMMAR_TENSE_PRESENT_PERFECT + '/#section0'}>Hiện tại hoàn thành</Link> <span className={styles.important}>mang tính trung lập</span></div>
                         </p>
                         
                     

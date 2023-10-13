@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import styles from './verticalNavBarGrammar.module.scss' 
 import { useState } from 'react';
+import PATH from '../../../config/routePathConfig';
 
 const VerticalNavBarGrammar = () => {
     const [openMenuTense, setOpenMenuTense] = useState(true)
@@ -29,71 +30,71 @@ const VerticalNavBarGrammar = () => {
     
                     <div className={openMenuTense ? styles.menuGrade2On : styles.menuGrade2Off}>
                         <Link
-                            className={`${styles.menu_item} ${location.pathname.indexOf("/grammar/tense/simple_present_tense") !== -1 ? styles.chooseOption: ''}`}
-                            to={"/grammar/tense/simple_present_tense/#section0"}>
+                            className={`${styles.menu_item} ${location.pathname.indexOf(PATH.GRAMMAR_TENSE_SIMPLE_PRESENT) !== -1 ? styles.chooseOption: ''}`}
+                            to={PATH.GRAMMAR_TENSE_SIMPLE_PRESENT + "/#section0"}>
                                 Simple Present Tense
                         </Link>
                         <Link
-                            className={`${styles.menu_item} ${location.pathname.indexOf("/grammar/tense/present_continuous_tense") !== -1 ? styles.chooseOption: ''}`}
-                            to={"/grammar/tense/present_continuous_tense/#section0"}>
+                            className={`${styles.menu_item} ${location.pathname.indexOf(PATH.GRAMMAR_TENSE_PRESENT_CONTINUOUS) !== -1 ? styles.chooseOption: ''}`}
+                            to={PATH.GRAMMAR_TENSE_PRESENT_CONTINUOUS + "/#section0"}>
                                 Present Continuous Tense
                         </Link>
                         <Link
-                            className={`${styles.menu_item} ${location.pathname.indexOf("/grammar/tense/present_perfect_tense") !== -1 ? styles.chooseOption: ''}`}
-                            to={"/grammar/tense/present_perfect_tense/#section0"}>
+                            className={`${styles.menu_item} ${location.pathname.indexOf(PATH.GRAMMAR_TENSE_PRESENT_PERFECT) !== -1 ? styles.chooseOption: ''}`}
+                            to={PATH.GRAMMAR_TENSE_PRESENT_PERFECT + "/#section0"}>
                                 Present Perfect Tense
                         </Link>
                         <Link
-                            className={`${styles.menu_item} ${location.pathname.indexOf("/grammar/tense/present_perfect_continuous_tense") !== -1 ? styles.chooseOption: ''}`}
-                            to={"/grammar/tense/present_perfect_continuous_tense/#section0"}>
+                            className={`${styles.menu_item} ${location.pathname.indexOf(PATH.GRAMMAR_TENSE_PRESENT_PERFECT_CONTINUOUS) !== -1 ? styles.chooseOption: ''}`}
+                            to={PATH.GRAMMAR_TENSE_PRESENT_PERFECT_CONTINUOUS + "/#section0"}>
                                 Present Perfect Continuous Tense
                         </Link>
                         <Link
-                            className={`${styles.menu_item} ${location.pathname.indexOf("/grammar/tense/past_simple_tense")!== -1 ? styles.chooseOption: ''}`}
-                            to={"/grammar/tense/past_simple_tense/#section0"}>
+                            className={`${styles.menu_item} ${location.pathname.indexOf(PATH.GRAMMAR_TENSE_PAST_SIMPLE)!== -1 ? styles.chooseOption: ''}`}
+                            to={PATH.GRAMMAR_TENSE_PAST_SIMPLE + "/#section0"}>
                                 Past Simple Tense
                         </Link>
                         <Link
-                            className={`${styles.menu_item} ${location.pathname.indexOf("/grammar/tense/past_continuous_tense") !== -1 ? styles.chooseOption: ''}`}
-                            to={"/grammar/tense/past_continuous_tense/#section0"}>
+                            className={`${styles.menu_item} ${location.pathname.indexOf(PATH.GRAMMAR_TENSE_PAST_CONTINUOUS) !== -1 ? styles.chooseOption: ''}`}
+                            to={PATH.GRAMMAR_TENSE_PAST_CONTINUOUS + "/#section0"}>
                                 Past Continuous Tense
                         </Link>
                         <Link
-                            className={`${styles.menu_item} ${location.pathname.indexOf("/grammar/tense/past_perfect_tense") !== -1 ? styles.chooseOption: ''}`}
-                            to={"/grammar/tense/past_perfect_tense/#section0"}>
+                            className={`${styles.menu_item} ${location.pathname.indexOf(PATH.GRAMMAR_TENSE_PAST_PERFECT) !== -1 ? styles.chooseOption: ''}`}
+                            to={PATH.GRAMMAR_TENSE_PAST_PERFECT + "/#section0"}>
                                 Past Perfect Tense
                         </Link>
                         <Link
-                            className={`${styles.menu_item} ${location.pathname.indexOf("/grammar/tense/past_perfect_continuous_tense") !== -1 ? styles.chooseOption: ''}`}
-                            to={"/grammar/tense/past_perfect_continuous_tense/#section0"}>
+                            className={`${styles.menu_item} ${location.pathname.indexOf(PATH.GRAMMAR_TENSE_PAST_PERFECT_CONTINUOUS) !== -1 ? styles.chooseOption: ''}`}
+                            to={PATH.GRAMMAR_TENSE_PAST_PERFECT_CONTINUOUS + "/#section0"}>
                                 Past Perfect Continuous Tense
                         </Link>
                         <Link
-                            className={`${styles.menu_item} ${location.pathname.indexOf("/grammar/tense/simple_future_tense") !== -1 ? styles.chooseOption: ''}`}
-                            to={"/grammar/tense/simple_future_tense/#section0"}>
+                            className={`${styles.menu_item} ${location.pathname.indexOf(PATH.GRAMMAR_TENSE_SIMPLE_FUTURE) !== -1 ? styles.chooseOption: ''}`}
+                            to={PATH.GRAMMAR_TENSE_SIMPLE_FUTURE + "/#section0"}>
                                 Simple Future Tense
                         </Link>
                         <Link
-                            className={`${styles.menu_item} ${location.pathname.indexOf("/grammar/tense/future_continuous_tense") !== -1 ? styles.chooseOption: ''}`}
-                            to={"/grammar/tense/future_continuous_tense/#section0"}>
+                            className={`${styles.menu_item} ${location.pathname.indexOf(PATH.GRAMMAR_TENSE_FUTURE_CONTINUOUS) !== -1 ? styles.chooseOption: ''}`}
+                            to={PATH.GRAMMAR_TENSE_FUTURE_CONTINUOUS + "/#section0"}>
                                 Future Continuous Tense
                         </Link>
                         <Link
-                            className={`${styles.menu_item} ${location.pathname.indexOf("/grammar/tense/future_perfect_tense")!== -1 ? styles.chooseOption: ''}`}
-                            to={"/grammar/tense/future_perfect_tense/#section0"}>
+                            className={`${styles.menu_item} ${location.pathname.indexOf(PATH.GRAMMAR_TENSE_FUTURE_PERFECT)!== -1 ? styles.chooseOption: ''}`}
+                            to={PATH.GRAMMAR_TENSE_FUTURE_PERFECT + "/#section0"}>
                                 Future Perfect Tense
                         </Link>
                         <Link
-                            className={`${styles.menu_item} ${location.pathname.indexOf("/grammar/tense/future_perfect_continuous_tense") !== -1 ? styles.chooseOption: ''}`}
-                            to={"/grammar/tense/future_perfect_continuous_tense/#section0"}>
+                            className={`${styles.menu_item} ${location.pathname.indexOf(PATH.GRAMMAR_TENSE_FUTURE_PERFECT_CONTINUOUS) !== -1 ? styles.chooseOption: ''}`}
+                            to={PATH.GRAMMAR_TENSE_FUTURE_PERFECT_CONTINUOUS + "/#section0"}>
                                 Future Perfect Continuous Tense
                         </Link>
                     </div>
                 </div>
 
                 <Link
-                className={`${styles.menu_item} ${location.pathname.indexOf("/grammar/about_s_es") !== -1 ? styles.chooseOption: ''}`} 
-                to={"/grammar/about_s_es/#section0"}>
+                className={`${styles.menu_item} ${location.pathname.indexOf(PATH.GRAMMAR_ABOUT_S_ES) !== -1 ? styles.chooseOption: ''}`} 
+                to={PATH.GRAMMAR_ABOUT_S_ES + "/#section0"}>
                     About (s/es)
                 </Link>
                 

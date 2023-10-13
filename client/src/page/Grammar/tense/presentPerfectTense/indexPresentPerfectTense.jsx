@@ -2,6 +2,7 @@ import styles from '../../infomationPage.module.scss';
 import ScrollFunc from '../../scrollFunc';
 import ScrollToTop from '../../../../component/scrollToTopButton/indexScrollToTop';
 import { Link } from 'react-router-dom';
+import PATH from '../../../../config/routePathConfig';
 
 const PresentPerfectTense = () => {
     const I = 'Khái niệm thì hiện tại hoàn thành';
@@ -118,10 +119,10 @@ const PresentPerfectTense = () => {
                             V3(V_ed) nói chính xác là dạng quá khứ phân từ (Past participle) của một động từ trong tiếng anh
                             <br></br>
                             <br></br>
-                            Cách để thành lập một V3(V_ed) đó là thêm vào phía sau của động từ hậu tố "ed"; <span className={styles.important}>Quy tắc cụ thể có thể tham khảo tại phần <Link className={styles.linkPage} to="/grammar/tense/past_simple_tense/#sectionIV_3">IV_3 của phần Past Simple Tense</Link></span>
+                            Cách để thành lập một V3(V_ed) đó là thêm vào phía sau của động từ hậu tố "ed"; <span className={styles.important}>Quy tắc cụ thể có thể tham khảo tại phần <Link className={styles.linkPage} to={PATH.GRAMMAR_TENSE_PAST_SIMPLE + "/#sectionIV_3"}>IV_3 của phần Past Simple Tense</Link></span>
                             <br/>
                             <br/>
-                            Tuy nhiên có một số từ trong tiếng anh có dạng (Past participle) <span className={styles.important}>không theo quy tắc</span> thêm hậu tố "ed" mà có hẳn một từ cho thể Past participle; Và ta gọi đó là <span className={styles.important}>Irregular Verbs</span>, Tham khảo bảng động tại <Link className={styles.linkPage} to={'/irregular_verbs/information'}>Irregular Verbs</Link>
+                            Tuy nhiên có một số từ trong tiếng anh có dạng (Past participle) <span className={styles.important}>không theo quy tắc</span> thêm hậu tố "ed" mà có hẳn một từ cho thể Past participle; Và ta gọi đó là <span className={styles.important}>Irregular Verbs</span>, Tham khảo bảng động tại <Link className={styles.linkPage} to={PATH.IRREGULAR_VERBS + '/information'}>Irregular Verbs</Link>
                             <br/>
                             <br/>
                         </div>

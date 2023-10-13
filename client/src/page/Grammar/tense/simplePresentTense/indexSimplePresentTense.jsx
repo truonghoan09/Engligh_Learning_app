@@ -18,7 +18,7 @@ const SimplePresentTense = () => {
         <>  
             <ScrollToTop />
             <div className={styles.container}>
-                <h1 className={styles.titlePage} id='#section0'>Thì hiện tại đơn<br/>(Simple Present Tense)</h1>
+                <h1 className={styles.titlePage} id='section0'>Thì hiện tại đơn<br/>(Simple Present Tense)</h1>
                 <div className={styles.toc}>
                     Mục lục
                     <ol type='I' className={styles.toc1}>

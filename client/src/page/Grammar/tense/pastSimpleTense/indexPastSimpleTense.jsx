@@ -2,6 +2,7 @@ import styles from '../../infomationPage.module.scss';
 import ScrollToTop from '../../../../component/scrollToTopButton/indexScrollToTop';
 import { Link } from 'react-router-dom';
 import ScrollFunc from '../../scrollFunc';
+import PATH from "../../../../config/routePathConfig";
 
 const PastSimpleTense = () => {
     const I = 'Khái niệm thì quá khứ đơn'
@@ -107,7 +108,7 @@ const PastSimpleTense = () => {
                             Cách để thành lập một V2(V_ed) đó là thêm vào phía sau của động từ hậu tố "ed"; <span className={styles.important}>Quy tắc cụ thể sẽ được trình bày tại phần IV_3 của bài này!</span>
                             <br/>
                             <br/>
-                            Tuy nhiên có một số từ trong tiếng anh có dạng (Past Tense) <span className={styles.important}>không theo quy tắc</span> thêm hậu tố "ed" mà có hẳn một từ cho thể Past Tense; Và ta gọi đó là <span className={styles.important}>Irregular Verbs</span>, Tham khảo bảng động tại <Link className={styles.linkPage} to={'/irregular_verbs/information'}>Irregular Verbs</Link>
+                            Tuy nhiên có một số từ trong tiếng anh có dạng (Past Tense) <span className={styles.important}>không theo quy tắc</span> thêm hậu tố "ed" mà có hẳn một từ cho thể Past Tense; Và ta gọi đó là <span className={styles.important}>Irregular Verbs</span>, Tham khảo bảng động tại <Link className={styles.linkPage} to={PATH.IRREGULAR_VERBS + '/information'}>Irregular Verbs</Link>
                             <br/>
                             <br/>
                         </div>

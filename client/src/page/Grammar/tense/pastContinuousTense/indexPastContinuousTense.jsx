@@ -2,6 +2,7 @@ import ScrollToTop from '../../../../component/scrollToTopButton/indexScrollToTo
 import styles from '../../infomationPage.module.scss';
 import {Link} from 'react-router-dom';
 import ScrollFunc from '../../scrollFunc';
+import PATH from '../../../../config/routePathConfig';
 
 const PastContinuousTense = () => {
     const I = 'Khái niệm thì quá khứ tiếp diễn'
@@ -50,7 +51,7 @@ const PastContinuousTense = () => {
                     </ol>
                 </div>
                 <div className={styles.title1} id='sectionI'>I. {I}</div>
-                    <p className={styles.content2}><span className={styles.tab}/>Tương tự như <Link className={styles.linkPage} to="/grammar/present_continuous_tense/#section0">Hiện tại tiếp diễn</Link>, thì quá khứ tiếp diễn <span className={styles.important}>Past continuous tense</span> dùng để: diễn tả một hành động, sự việc đang diễn ra xung quanh một thời điểm trong quá khứ.</p>
+                    <p className={styles.content2}><span className={styles.tab}/>Tương tự như <Link className={styles.linkPage} to={PATH.GRAMMAR_TENSE_PRESENT_CONTINUOUS + "/#section0"}>Hiện tại tiếp diễn</Link>, thì quá khứ tiếp diễn <span className={styles.important}>Past continuous tense</span> dùng để: diễn tả một hành động, sự việc đang diễn ra xung quanh một thời điểm trong quá khứ.</p>
                 <div className={styles.title1} id='sectionII'>II. {II}</div>
                 <p className={styles.content2}>
                     <ol className={styles.usePastSimpleTense}>
@@ -104,7 +105,7 @@ const PastContinuousTense = () => {
                         </div>
                     <p className={styles.title2}><span className={styles.tab} id='sectionIV_3'/>3. {IV_3}</p>
                         <p className={styles.content4}>
-                            Bạn có thể xem lại ở phần <Link className={styles.linkPage} to="/grammar/tense/present_continuous_tense/#sectionIV">{IV_3}</Link> ở bài thì hiện tại tiếp diễn
+                            Bạn có thể xem lại ở phần <Link className={styles.linkPage} to={PATH.GRAMMAR_TENSE_PRESENT_CONTINUOUS + "/#sectionIV"}>{IV_3}</Link> ở bài thì hiện tại tiếp diễn
                         </p>
                             
 

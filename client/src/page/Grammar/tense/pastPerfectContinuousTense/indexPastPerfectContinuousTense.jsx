@@ -2,6 +2,7 @@ import styles from '../../infomationPage.module.scss';
 import ScrollToTop from '../../../../component/scrollToTopButton/indexScrollToTop';
 import { Link } from 'react-router-dom';
 import ScrollFunc from '../../scrollFunc';
+import PATH from '../../../../config/routePathConfig';
 
 const PastPerfectContinuousTense = () => {
     const I = 'Khái niệm thì quá khứ hoàn thành tiếp diễn'
@@ -110,7 +111,7 @@ const PastPerfectContinuousTense = () => {
                                 <br/>
                                 <span className={styles.important}>Note: </span> Trong cách dùng này thì: <br/>
                                 - <strong>Hành động gây ra kết</strong> quả sẽ được dùng thì <span className={styles.important}>Quá khứ hoàn thành tiếp diễn</span><br/>
-                                - <strong>Kết quả</strong> của hành động kia gây ra sẽ được dùng thì <Link className={styles.linkPage} to={"/grammar/tense/past_simple_tense/#section0"}>Quá khứ đơn</Link>
+                                - <strong>Kết quả</strong> của hành động kia gây ra sẽ được dùng thì <Link className={styles.linkPage} to={PATH.GRAMMAR_TENSE_PAST_SIMPLE + "/#section0"}>Quá khứ đơn</Link>
                                 </div>
                             </div>
                         </li>
@@ -161,7 +162,7 @@ const PastPerfectContinuousTense = () => {
                         </div>
                     <p className={styles.title2}><span className={styles.tab} id='sectionIV_2'/>2. {IV_2}</p>
                         <div className={styles.content4}>
-                        Bạn có thể xem lại ở phần <Link className={styles.linkPage} to="/grammar/tense/present_continuous_tense/#sectionIV">{IV_2}</Link> ở bài thì hiện tại tiếp diễn
+                        Bạn có thể xem lại ở phần <Link className={styles.linkPage} to={PATH.GRAMMAR_TENSE_PRESENT_CONTINUOUS + "/#sectionIV"}>{IV_2}</Link> ở bài thì hiện tại tiếp diễn
                         <br/>
                         <br/>
                         </div>

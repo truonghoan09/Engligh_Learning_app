@@ -2,6 +2,7 @@ import styles from '../../infomationPage.module.scss';
 import ScrollToTop from '../../../../component/scrollToTopButton/indexScrollToTop';
 import { Link } from 'react-router-dom';
 import ScrollFunc from '../../scrollFunc';
+import PATH from '../../../../config/routePathConfig';
 
 const PastPerfectTense = () => {
     const I = 'Khái niệm thì quá khứ hoàn thành'
@@ -51,7 +52,7 @@ const PastPerfectTense = () => {
                         <li>Diễn đạt một hành động <span className={styles.important}>hoàn tất trước khi một hành động khác xảy ra</span> trong quá khứ.
                             <ul>
                                 <li>Hành động xãy ra trước =&gt; thì Quá khứ hoàn thành</li>
-                                <li>Hành động xãy ra sau =&gt; thì <Link className={styles.linkPage} to='/grammar/tense/past_simple_tense/#section0'>Quá khứ đơn</Link></li>
+                                <li>Hành động xãy ra sau =&gt; thì <Link className={styles.linkPage} to={PATH.GRAMMAR_TENSE_PAST_SIMPLE + '/#section0'}>Quá khứ đơn</Link></li>
                             </ul>
                             <div>
                                 <div><span className={styles.important}>Ex: </span>Last week, I visited my hometown. It had changed a lot. 
@@ -94,7 +95,7 @@ const PastPerfectTense = () => {
                     <div className={styles.title1} id='sectionIV'>IV. {IV}</div>
                     <p className={styles.title2}><span className={styles.tab} id='sectionIV_1'/>1. {IV_1}</p>
                         <div className={styles.content4}>
-                            Xem cụ thể về V3(V_ed) <Link className={styles.linkPage} to='/grammar/tense/present_perfect_tense/#sectionIV_3'>tại đây</Link>
+                            Xem cụ thể về V3(V_ed) <Link className={styles.linkPage} to={PATH.GRAMMAR_TENSE_PRESENT_PERFECT + '/#sectionIV_3'}>tại đây</Link>
                         <br/>
                         <br/>
                         </div>
