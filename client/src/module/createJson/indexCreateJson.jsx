@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./createJson.module.scss";
 import {useDispatch, useSelector} from "react-redux";
-import { uploadAndGetURL } from "../../redux/action";
 import LoadingModal from "../../component/loadingModal/indexLoading";
 import ModalNotice from "../../component/modalNotice/modalNotice";
+import { fetchURL } from "../../reudux_toolkit/slices/uploadAndGetURL";
 
 
 const CreateJson = () => {
@@ -27,6 +27,8 @@ const CreateJson = () => {
     const [URL_Verb2 ,setURL_Verb2] = useState(null);
     const [URL_Verb3 ,setURL_Verb3] = useState(null);
 
+    // const [canCreateJson, setCanCreateJson] = useState(false);
+
     const [data, setData] = useState();
     const [checkedVerb ,setCheckedVerb] = useState(false);
 
@@ -36,16 +38,31 @@ const CreateJson = () => {
     const [notice, setnotice] = useState({isshow: false, message: "", severity: "",type: ""});
 
     
-    const audioRef1 = useRef(null)
-    const audioRef2 = useRef(null)
-    const audioRef3 = useRef(null)
+    const dispatch = useDispatch();
+    const loading = useSelector(state => state.getURL.loading);
+    const payload = useSelector(state => state.getURL.payload);
+    const error = useSelector(state => state.getURL.error);
+    
+
+    useEffect(() => {
+        if (payload) {
+            if (payload.status === '1') {
+                setURL_Verb1(payload.url);
+            }
+            if (payload.status === '2') {
+                setURL_Verb2(payload.url);
+            }
+            if (payload.status === '3') {
+                setURL_Verb3(payload.url);
+            }
+        }
+    }, [payload])
 
     const handleClickCreateJSON = async() => {
-
         if (checkVal()) {
-            dispatch(uploadAndGetURL(soundVerb1, '1'));
-            dispatch(uploadAndGetURL(soundVerb2, '2'));
-            dispatch(uploadAndGetURL(soundVerb3, '3'));
+            dispatch(fetchURL({file: soundVerb1, status: '1'})); 
+            dispatch(fetchURL({file: soundVerb2, status: '2'})); 
+            dispatch(fetchURL({file: soundVerb3, status: '3'}));
         } else {
             setnotice({isshow: true, message: "Vui lòng nhập đầy đủ tất cả các ô input!", severity: "Thông Báo", type: "Notification Just Noitce"})
         }
@@ -55,29 +72,7 @@ const CreateJson = () => {
         return (verb1 && verb2 && verb3 && IPA_verb1 && IPA_verb2 && IPA_verb3 && soundVerb1 && soundVerb2 && soundVerb3 && meaning);
     }
 
-    const dispatch = useDispatch();
-    const loading = useSelector(state => state.uploadAndGetFileReducer.loading);
-    const payload = useSelector(state => state.uploadAndGetFileReducer.payload);
-    const error = useSelector(state => state.uploadAndGetFileReducer.error);
     
-    useEffect(() => {
-        if (payload) {
-            if (payload) {
-                if (payload.status){
-                    if (payload.status === '1') {
-                        setURL_Verb1(payload.url);
-                    }
-                    if (payload.status === '2') {
-                        setURL_Verb2(payload.url);
-                    }
-                    if (payload.status === '3') {
-                        setURL_Verb3(payload.url);
-                    }
-                }
-            } 
-        }
-    }, [payload]);
-
     // Lắng nghe lỗi tải lên hoặc lấy URL
     useEffect(() => {
         if (error) {
@@ -132,18 +127,6 @@ const CreateJson = () => {
             },
         })
     }
-
-    // const handlePlaySound = (ref) => {
-    //     if (ref===1) {
-    //         audioRef1.current.play();
-    //     } else {
-    //         if (ref===2) {
-    //             audioRef2.current.play();
-    //         } else {
-    //             audioRef3.current.play();
-    //         }
-    //     }
-    // }
     
     const handleClickCopy = (JSON) => {
         let data = JSON.slice(1, JSON.length-1);

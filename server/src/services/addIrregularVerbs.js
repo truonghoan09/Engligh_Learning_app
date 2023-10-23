@@ -12,7 +12,8 @@ const AddIrregularVerbs = async (data) => {
         if (!objectSnapshot.exists()) {
             // Nếu không tồn tại irregularVerbs, tạo mới và thêm data vào
             await set(objectRef, newData);
-            return { errCode: 0, message: 'Object created and data added to the database' };
+            console.log(data.data);
+            return { errCode: 0, message: 'Object created and data added to the database'};
         } else {
             const objectData = objectSnapshot.val();
             for (const key in newData) {

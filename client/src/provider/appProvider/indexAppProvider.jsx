@@ -1,7 +1,8 @@
 import { Suspense } from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import store from '../../redux/store';
+import { store } from '../../reudux_toolkit/store';
+
 
 export default function AppProvider({ children }) {
   return (

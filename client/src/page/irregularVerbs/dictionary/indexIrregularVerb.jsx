@@ -2,16 +2,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import {useEffect, useRef, useState} from 'react';
 import styles from './irregularVerb.module.scss';
 import LoadingModal from '../../../component/loadingModal/indexLoading';
-import { getDataIrregularVerbsPage } from '../../../redux/action';
-import { Link } from 'react-router-dom';
+import { getIrr } from '../../../reudux_toolkit/slices/getDataIrregularVerbsPage';
 
 const IrregularVerb = () => {
 
     const dispatch = useDispatch();
     
-    const loading = useSelector(state => state.getDataIrregularVerbsPageReducer.loading);
-    const data = useSelector(state => state.getDataIrregularVerbsPageReducer.data);
-    const error = useSelector(state => state.getDataIrregularVerbsPageReducer.error);
+    const loading = useSelector(state => state.getDataIrr.loading);
+    const data = useSelector(state => state.getDataIrr.data);
+    const error = useSelector(state => state.getDataIrr.error);
 
     const [result, setResult] = useState();
     const [searchWord, setSearchWord] = useState('');
@@ -32,7 +31,6 @@ const IrregularVerb = () => {
                     if (data.subData){
                     let removeArr = [];
                     let updatedResult = [...data.data];
-                    console.log(updatedResult);
                     data.subData.map((v,_) => {
                             for (const key in v) {
                                 if (!key.includes(searchWord)) {
@@ -71,15 +69,6 @@ const IrregularVerb = () => {
                             delete updatedResult[v];
                         })
 
-                        // let c2 = 0;
-                        // while (c2 < updatedResult.length) {
-                        //     if (updatedResult[c2] === undefined) {
-                        //         updatedResult.splice(c2 , 1);
-                        //     } else {
-                        //         c2++;
-                        //     }
-                        // }
-
                         setResult(updatedResult);
                     }
                 }
@@ -88,7 +77,7 @@ const IrregularVerb = () => {
     }, [data, searchWord])
 
     useEffect(() => {
-        dispatch(getDataIrregularVerbsPage());
+        dispatch(getIrr());
     }, [])
 
     const getMeaning = (data) => {

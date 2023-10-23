@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import styles from './addIrregularVerbs.module.scss'
 import { useDispatch, useSelector } from 'react-redux';
 import LoadingModal from '../../component/loadingModal/indexLoading';
-import { addIrregularVerbs } from '../../redux/action';
+import { addIrr } from '../../reudux_toolkit/slices/addIrregularVerbs';
+import ModalNotice from '../../component/modalNotice/modalNotice';
 
 const  AddIrregularVerbs = () => {
    
@@ -10,6 +11,7 @@ const  AddIrregularVerbs = () => {
     const [JSONtext, setJSONtext] = useState('');
     const [cacheMemory, setCacheMemory] = useState('');
     const [sendData, setSendData] = useState(false);
+    const [notice, setnotice] = useState({isshow: false, message: "", severity: "",type: ""});
 
 
     const handleClickResetAll = () => {
@@ -47,18 +49,31 @@ const  AddIrregularVerbs = () => {
     }
 
     const dispatch = useDispatch();
-    const data = useSelector (state => state.addIrregularVerbsReducer.data);
-    const loading = useSelector (state => state.addIrregularVerbsReducer.loading);
-    const error = useSelector (state => state.addIrregularVerbsReducer.error);
-
+    
     useEffect(() => {
         if (sendData) {
-            console.log(cacheMemory);
-            dispatch(addIrregularVerbs(cacheMemory));
+            dispatch(addIrr(cacheMemory));
             setCacheMemory('');
             setSendData(false);
         }
     }, [sendData]);
+    
+    const loading = useSelector(state => state.addIrregularVerbs.loading);
+    const data = useSelector(state => state.addIrregularVerbs.data);
+    
+    useEffect(() => {
+        if (data) {
+            if (data.errCode === 1) {
+                setnotice({isshow: true, message: `Bộ từ bạn vừa thêm đã tồn tại trong dataBase và hệ thống đã bỏ qua quá trình thêm bộ này`, severity: "Thông Báo", type: "Notification Just Noitce"})
+            }
+            if (data.errCode === 0) {
+                setnotice({isshow: true, message: `Bộ từ bạn vừa được thêm thành công vào dataBase!`, severity: "Thông Báo", type: "Notification Just Noitce"})
+            }
+            if (data.errCode === 2) {
+                setnotice({isshow: true, message: `Có lỗi khi thêm bộ từ: ${data.message}`, severity: "Warning", type: "Notification Just Noitce"})
+            }
+        }
+    }, [data])
 
     useEffect(() => {
         if (localStorage.getItem("JSON_from_addIrregularVerbs")) {
@@ -75,6 +90,7 @@ const  AddIrregularVerbs = () => {
     return (
         <>
             {loading &&  <LoadingModal/>}
+            <ModalNotice show={notice.isshow} onHide={()=>setnotice(!notice.isshow)} message={notice.message} severity={notice.severity} type={notice.type}/>
             <div className={styles.container}>
                 <div className={styles.containerInput}>
                     <textarea rows="15" cols="150" className={styles.inputField} placeholder="Enter your JSON" 
@@ -85,9 +101,6 @@ const  AddIrregularVerbs = () => {
                     <div className={`${styles.button} ${JSONtext === '' && styles.disabled}`}
                         onClick={() => {handleClickSaveToCacheMemory()}}>
                         Save to cache memory
-                        {
-                            JSONtext === '' && <div className={styles.arlert}>Please enter your JSON into the input box.</div>
-                        }
                     </div>
                     <div className={`${styles.button} ${cacheMemory === '' && styles.disabled}`}
                         onClick={() => {handleClickAddAllToDataBase()}}>

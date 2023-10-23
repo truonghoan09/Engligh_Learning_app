@@ -29,7 +29,7 @@ const InformationIrregularVerbs = () => {
                 </div>
                 <div className={styles.title1} id='sectionI'>I. {I}:</div>
                 <div className={styles.content1}>
-                <p><span class={styles.tab}></span>
+                <p><span className={styles.tab}></span>
                 Irregular verbs trong tiếng Anh là một nhóm các động từ có 
                     <span className={styles.important}> hình thức thay đổi</span> khi chuyển từ dạng cơ bản sang các dạng khác như quá khứ đơn (simple past) và quá khứ phân từ (past participle). 
                 </p>
