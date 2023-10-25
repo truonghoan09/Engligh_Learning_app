@@ -59,7 +59,7 @@ const CreateJson = () => {
     }, [payload])
 
     const handleClickCreateJSON = async() => {
-        if (checkVal()) {
+        if (checkVal()) {   
             dispatch(fetchURL({file: soundVerb1, status: '1'})); 
             dispatch(fetchURL({file: soundVerb2, status: '2'})); 
             dispatch(fetchURL({file: soundVerb3, status: '3'}));

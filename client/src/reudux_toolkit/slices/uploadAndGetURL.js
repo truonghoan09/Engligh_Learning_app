@@ -1,3 +1,32 @@
+// import { createSlice } from "@reduxjs/toolkit";
+
+
+// export const getURLSlice = createSlice ({
+//     name: 'getURL',
+//     initialState: {
+//         loading: false,
+//         payload: null,
+//         error: null,
+//     },
+//     reducers: {
+//         fetchURLPending: (state) => {
+//             state.loading = true;
+//         },
+//         fetchURLFulfilled: (state, action) => {
+//             state.loading = false;
+//             state.payload = action.payload;
+//         },
+//         fetchURLRejected: (state, action) => {
+//             state.loading = false;
+//             state.payload = null;
+//             state.error = action.payload.error;
+//         },
+//     }
+// })
+
+// export const { fetchURLPending, fetchURLFulfilled, fetchURLRejected } = getURLSlice.actions;
+// export default getURLSlice.reducer;
+
 import { getDownloadURL, ref, uploadBytes} from "firebase/storage";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { storage } from "../../App";

@@ -1,16 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
-
-export const addIrr = createAsyncThunk ('addIrregularVerbs/addIrregularVerbsSlice', async (data) =>{
-    const response = await axios ({
-        method: 'post',
-        url: 'http://localhost:8008/api/add_irregularverbs',
-        data: {
-            data: data,
-        }
-    })
-    return response.data;
-})
+import { createSlice } from "@reduxjs/toolkit";
 
 export const addIrregularVerbsSlice = createSlice({
     name: 'addIrregularVerbs',
@@ -19,21 +7,21 @@ export const addIrregularVerbsSlice = createSlice({
         data: null,
         error: null,
     },
-    extraReducers: {
-        [addIrr.pending]: (state) => {
+    reducers: {
+        addIrrPending: (state) => {
             state.loading = true;
         },
-        [addIrr.fulfilled]: (state, action) => {
+        addIrrFullilled: (state, action) => {
             state.loading = false;
             state.data = action.payload;
-            state.error = null;
         },
-        [addIrr.error]: (state, action) => {
+        addIrrRejected: (state, action) => {
             state.loading = false;
             state.data = null;
             state.error = action.error;
         }
-    }
+    },
 })
 
+export const {addIrrPending, addIrrFullilled, addIrrRejected} = addIrregularVerbsSlice.actions;
 export default addIrregularVerbsSlice.reducer;

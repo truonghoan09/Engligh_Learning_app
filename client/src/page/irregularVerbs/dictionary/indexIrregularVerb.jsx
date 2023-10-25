@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {useEffect, useRef, useState} from 'react';
 import styles from './irregularVerb.module.scss';
 import LoadingModal from '../../../component/loadingModal/indexLoading';
-import { getIrr } from '../../../reudux_toolkit/slices/getDataIrregularVerbsPage';
+import { getDataPending } from '../../../reudux_toolkit/slices/getDataIrregularVerbsPage';
 
 const IrregularVerb = () => {
 
@@ -20,6 +20,7 @@ const IrregularVerb = () => {
             console.log(error);
         }
     }, [error])
+    
 
     useEffect(() => {
         if (data) {
@@ -77,7 +78,7 @@ const IrregularVerb = () => {
     }, [data, searchWord])
 
     useEffect(() => {
-        dispatch(getIrr());
+        dispatch(getDataPending());
     }, [])
 
     const getMeaning = (data) => {
@@ -151,7 +152,7 @@ const IrregularVerb = () => {
                                 {
                                     result.map(( value , index) => { 
                                         return(
-                                            <tr>
+                                            <tr key={`index`+index}>
                                                 <td>{index+1}</td>
                                                 <td className={styles.word} onClick={()=> handlePlaySound(`${getverb(value, 1)}1`)}>{getverb(value, 1) }
                                                     <div className={styles.ipa}>{getIPA(value, 1)}</div>

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import styles from './addIrregularVerbs.module.scss'
 import { useDispatch, useSelector } from 'react-redux';
 import LoadingModal from '../../component/loadingModal/indexLoading';
-import { addIrr } from '../../reudux_toolkit/slices/addIrregularVerbs';
+import { addIrrPending} from '../../reudux_toolkit/slices/addIrregularVerbs';
 import ModalNotice from '../../component/modalNotice/modalNotice';
 
 const  AddIrregularVerbs = () => {
@@ -52,7 +52,7 @@ const  AddIrregularVerbs = () => {
     
     useEffect(() => {
         if (sendData) {
-            dispatch(addIrr(cacheMemory));
+            dispatch(addIrrPending(cacheMemory));
             setCacheMemory('');
             setSendData(false);
         }

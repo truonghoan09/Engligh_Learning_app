@@ -34,7 +34,7 @@ const InformationIrregularVerbs = () => {
                     <span className={styles.important}> hình thức thay đổi</span> khi chuyển từ dạng cơ bản sang các dạng khác như quá khứ đơn (simple past) và quá khứ phân từ (past participle). 
                 </p>
                             
-                <p><span class={styles.tab}></span>
+                <p><span className={styles.tab}></span>
                     <span className={styles.important}>
                     Khác với các động từ quy tắc
                     </span> (chỉ cần thêm -ed để thành lập từ), các <span className={styles.important}>động từ bất quy tắc KHÔNG tuân theo các quy tắc cụ thể</span>

@@ -2,17 +2,18 @@ const { ref, get, set, getDatabase, update } = require('firebase/database');
 
 const AddIrregularVerbs = async (data) => {
     const db = getDatabase();
+
     
     try {
         const objectRef = ref(db, 'irregularVerbs'); // Đổi thành đường dẫn thực tế của bạn
         const objectSnapshot = await get(objectRef);
         
-        const newData = JSON.parse(`{${data.data}}`);
+        const newData = JSON.parse(`{${data.payload}}`);
 
         if (!objectSnapshot.exists()) {
             // Nếu không tồn tại irregularVerbs, tạo mới và thêm data vào
             await set(objectRef, newData);
-            console.log(data.data);
+            console.log(data.payload);
             return { errCode: 0, message: 'Object created and data added to the database'};
         } else {
             const objectData = objectSnapshot.val();
