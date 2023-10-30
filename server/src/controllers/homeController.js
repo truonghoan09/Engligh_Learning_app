@@ -10,7 +10,8 @@ const getHomePage = (req, res) => {
 //     return await res.status(200).json(result); 
 // }
 const addIrregularVerbs = async (req, res) => {
-    let data = req.body;
+    console.log('req from homecontroler: ',req.body)
+    let data = req.body.payload;
     let result = await AddIrregularVerbs(data)
     return await res.status(200).json(result);
 }

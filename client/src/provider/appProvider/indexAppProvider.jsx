@@ -1,15 +1,16 @@
 import { Suspense } from 'react';
-import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import { store } from '../../reudux_toolkit/store';
+import { QueryClient, QueryClientProvider } from 'react-query';
+
+const queryClient = new QueryClient();
 
 
 export default function AppProvider({ children }) {
   return (
-    <Provider store={store}>
-      <Suspense fallback={<h1>Loading...</h1>}>
-        <BrowserRouter>{children}</BrowserRouter>
-      </Suspense>
-    </Provider>
+    <QueryClientProvider client={queryClient}>
+        <Suspense fallback={<h1>Loading...</h1>}>
+          <BrowserRouter>{children}</BrowserRouter>
+        </Suspense>
+    </QueryClientProvider>
   );
 }

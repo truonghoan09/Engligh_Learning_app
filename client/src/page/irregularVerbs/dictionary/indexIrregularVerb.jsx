@@ -1,16 +1,18 @@
-import { useDispatch, useSelector } from 'react-redux';
 import {useEffect, useRef, useState} from 'react';
 import styles from './irregularVerb.module.scss';
 import LoadingModal from '../../../component/loadingModal/indexLoading';
-import { getDataPending } from '../../../reudux_toolkit/slices/getDataIrregularVerbsPage';
+import { useQuery } from 'react-query';
+import axios from 'axios';
 
 const IrregularVerb = () => {
 
-    const dispatch = useDispatch();
-    
-    const loading = useSelector(state => state.getDataIrr.loading);
-    const data = useSelector(state => state.getDataIrr.data);
-    const error = useSelector(state => state.getDataIrr.error);
+    const {data, isLoading, error} = useQuery({
+        queryKey: "http://localhost:8008/api/get_irregularverbs_page",
+        queryFn: async () => {
+            const result = await axios.get("http://localhost:8008/api/get_irregularverbs_page")
+            return result.data;
+        }
+    })
 
     const [result, setResult] = useState();
     const [searchWord, setSearchWord] = useState('');
@@ -77,10 +79,6 @@ const IrregularVerb = () => {
         }
     }, [data, searchWord])
 
-    useEffect(() => {
-        dispatch(getDataPending());
-    }, [])
-
     const getMeaning = (data) => {
         return (Object.keys(data)[0]);
     }
@@ -128,7 +126,7 @@ const IrregularVerb = () => {
     return(
         <>
             <div className={styles.containerPage}>
-            {loading && <LoadingModal />}
+            {isLoading && <LoadingModal />}
                 <div className={styles.containerContent}>
                     <div className={styles.searchContainer}>Search Word
                         <div className={styles.inputArea}>

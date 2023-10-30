@@ -1,9 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./createJson.module.scss";
-import {useDispatch, useSelector} from "react-redux";
 import LoadingModal from "../../component/loadingModal/indexLoading";
 import ModalNotice from "../../component/modalNotice/modalNotice";
-import { fetchURL } from "../../reudux_toolkit/slices/uploadAndGetURL";
+import { useMutation } from "react-query";
+import { storage } from "../../App";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 
 const CreateJson = () => {
@@ -37,32 +38,43 @@ const CreateJson = () => {
 
     const [notice, setnotice] = useState({isshow: false, message: "", severity: "",type: ""});
 
-    
-    const dispatch = useDispatch();
-    const loading = useSelector(state => state.getURL.loading);
-    const payload = useSelector(state => state.getURL.payload);
-    const error = useSelector(state => state.getURL.error);
+    const [loading, setLoading] = useState(false);
+
+    const result = useMutation({
+        mutationFn: async (data) => {
+            const storageRef = ref(storage, `Sound_IrregularVerbs/${data.soundVerb.name}`);
+            await uploadBytes(storageRef, data.soundVerb);
+            const url = await getDownloadURL(storageRef);
+            if(data.status === "1") {
+                setURL_Verb1(url)
+            }
+            if(data.status === "2") {
+                setURL_Verb2(url)
+            }
+            if(data.status === "3") {
+                setURL_Verb3(url)
+            }
+        }   
+    })
+
+    useEffect(() => {
+        setLoading(result.isLoading);
+    }, [result.isLoading])
+
     
 
     useEffect(() => {
-        if (payload) {
-            if (payload.status === '1') {
-                setURL_Verb1(payload.url);
-            }
-            if (payload.status === '2') {
-                setURL_Verb2(payload.url);
-            }
-            if (payload.status === '3') {
-                setURL_Verb3(payload.url);
-            }
+        if (result.error) {
+            console.log(result.error.message);
         }
-    }, [payload])
+    }, [result.error])
+    
 
     const handleClickCreateJSON = async() => {
         if (checkVal()) {   
-            dispatch(fetchURL({file: soundVerb1, status: '1'})); 
-            dispatch(fetchURL({file: soundVerb2, status: '2'})); 
-            dispatch(fetchURL({file: soundVerb3, status: '3'}));
+            await result.mutate({soundVerb: soundVerb1, status:'1'})
+            await result.mutate({soundVerb: soundVerb2, status:'2'})
+            await result.mutate({soundVerb: soundVerb3, status:'3'})
         } else {
             setnotice({isshow: true, message: "Vui lòng nhập đầy đủ tất cả các ô input!", severity: "Thông Báo", type: "Notification Just Noitce"})
         }
@@ -72,13 +84,6 @@ const CreateJson = () => {
         return (verb1 && verb2 && verb3 && IPA_verb1 && IPA_verb2 && IPA_verb3 && soundVerb1 && soundVerb2 && soundVerb3 && meaning);
     }
 
-    
-    // Lắng nghe lỗi tải lên hoặc lấy URL
-    useEffect(() => {
-        if (error) {
-            console.log(error);
-        }
-    }, [error]);
 
     const fomatVerb = () => {
         setVerb1(`${verb1}1`);

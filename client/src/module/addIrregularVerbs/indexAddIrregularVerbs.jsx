@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import styles from './addIrregularVerbs.module.scss'
-import { useDispatch, useSelector } from 'react-redux';
 import LoadingModal from '../../component/loadingModal/indexLoading';
-import { addIrrPending} from '../../reudux_toolkit/slices/addIrregularVerbs';
 import ModalNotice from '../../component/modalNotice/modalNotice';
+import { useMutation } from 'react-query';
+import axios from 'axios';
+import { redirect } from 'react-router-dom';
 
 const  AddIrregularVerbs = () => {
    
@@ -12,6 +13,9 @@ const  AddIrregularVerbs = () => {
     const [cacheMemory, setCacheMemory] = useState('');
     const [sendData, setSendData] = useState(false);
     const [notice, setnotice] = useState({isshow: false, message: "", severity: "",type: ""});
+
+    const [data, setData] = useState();
+    const [loading, setLoading] = useState(false);
 
 
     const handleClickResetAll = () => {
@@ -35,31 +39,44 @@ const  AddIrregularVerbs = () => {
         }
     }
 
-    const handleClickAddAllToDataBase = () => {
+    const handleClickAddAllToDataBase = async () => {
         if (JSONtext !== '') {
             handleClickSaveToCacheMemory();
             handleResetLocalstorage();
-            setSendData(true);
+            result.mutate({payload: cacheMemory});
+            setCacheMemory('');
         } else {
             if (cacheMemory !== '') {
                 handleResetLocalstorage();
-                setSendData(true);
+                await result.mutate({payload: cacheMemory});
+                setCacheMemory('');
             }
         }
     }
 
-    const dispatch = useDispatch();
+    const result = useMutation({
+        mutationFn: async (cacheMemory) => {
+            const response = await axios.post('http://localhost:8008/api/add_irregularverbs', cacheMemory)
+            return response.data;
+        }
+    })
     
     useEffect(() => {
-        if (sendData) {
-            dispatch(addIrrPending(cacheMemory));
-            setCacheMemory('');
-            setSendData(false);
+        if(result.error) {
+            console.log(result.error);
         }
-    }, [sendData]);
+    }, [result.error]);
     
-    const loading = useSelector(state => state.addIrregularVerbs.loading);
-    const data = useSelector(state => state.addIrregularVerbs.data);
+
+    useEffect(() => {
+        if(result.data) {
+            setData(result.data);
+        }
+    }, [result.data])
+
+    useEffect(() => {
+        setLoading(result.isLoading);
+    }, [result.isLoading])
     
     useEffect(() => {
         if (data) {
