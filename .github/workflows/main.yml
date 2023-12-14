@@ -20,12 +20,12 @@ jobs:
 
     - name: Install dependencies
       run: npm install
-      working-directory: truonghoan09/English_Learning_app/client/
+      working-directory: client
 
     - name: Build
       run: npm run build
-      working-directory: truonghoan09/English_Learning_app/client/
+      working-directory: client
 
     - name: Deploy to Firebase
       run: firebase deploy --token ${{ secrets.FIREBASE_TOKEN }}
-      working-directory: truonghoan09/English_Learning_app/client/
+      working-directory: client
