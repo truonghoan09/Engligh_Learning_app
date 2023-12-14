@@ -32,4 +32,4 @@ jobs:
 
     - name: Deploy to Firebase
       run: firebase deploy --token "$FIREBASE_TOKEN"
-      working-directory: client
+      working-directory: client/firebase.json
