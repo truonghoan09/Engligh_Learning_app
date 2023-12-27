@@ -1,6 +1,6 @@
 
-import AddIrregularVerbs from "../services/addIrregularVerbs";
-import GetIrregularVerbsPage from "../services/getDataIrregularVerbsPage";
+import {AddIrregularVerbs} from '../services/addIrregularVerbs'
+import {GetIrregularVerbsPage} from '../services/getDataIrregularVerbsPage'
 const getHomePage = (req, res) => {
     return res.send("Server is Running!");
     };

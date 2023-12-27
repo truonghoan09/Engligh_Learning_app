@@ -1,4 +1,9 @@
 const { ref, get, getDatabase } = require('firebase/database');
+const { initializeApp } = require('firebase/app');
+const { firebaseConfig } = require('../configFirebase');
+const { json } = require('body-parser');
+
+initializeApp(firebaseConfig)
 
 const sortData = (data) => {
     let result = {};
@@ -76,23 +81,11 @@ const translateToArr = (data) => {
     for (const key in data) {
         arr.push({[key]: data[key]});
     }
-    // arr.sort((a, b) => {
-    //     let fa = a.toLowerCase(),
-    //     fb = b.toLowerCase();
-        
-    //     if (fa < fb) {
-    //         return -1;
-    //     }
-    //     if (fa > fb) {
-    //         return 1;
-    //     }
-    //     return 0;
-    // });
     return(arr);
 }
 
 
-const GetIrregularVerbsPage = async () => {
+exports.handler = async (event, context) => {
     const db = getDatabase();
     let ArrResult = [];
     let ArrSubResult = '';
@@ -102,12 +95,21 @@ const GetIrregularVerbsPage = async () => {
         const data_base = objectSnapshot.val();
         ArrResult = sortData(data_base);
         ArrSubResult = translateToArr(data_base, ArrResult);
-        return {errCode: 0, message: 'Success', data: ArrResult, subData: ArrSubResult};
+        return{ 
+            statusCode: 200,
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Headers": "Authorization, Content-Type"
+            },
+            body: JSON.stringify({
+                errCode: 0, 
+                message: 'Success',
+                data: ArrResult,
+                subData: ArrSubResult
+            })
+        } 
     }
     catch (error) {
-        console.error('Error:', error);
-        return { errCode: -1, message: 'An error occurred' };
+        throw(error);        
     }
-};
-
-module.exports = {GetIrregularVerbsPage};
+}

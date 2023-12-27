@@ -1,20 +1,22 @@
 const { ref, get, set, getDatabase, update } = require('firebase/database');
-
-const AddIrregularVerbs = async (data) => {
-    const db = getDatabase();
-    
+const { initializeApp } = require('firebase/app');
+const { firebaseConfig } = require('../configFirebase');
+initializeApp(firebaseConfig)
+exports.handler = async (event, context) => {
+    let message = '';
+    let errCode = 0;
     try {
+        const db = getDatabase();
         const objectRef = ref(db, 'irregularVerbs'); 
         // Đổi thành đường dẫn thực tế của bạn
-        
         const objectSnapshot = await get(objectRef);
-        
-        const newData = JSON.parse(`{${data.data}}`);
-
+        console.log(event.body);
+        console.log(typeof(event.body));
+        const newData = JSON.parse(event.body);
         if (!objectSnapshot.exists()) {
             // Nếu không tồn tại irregularVerbs, tạo mới và thêm data vào
             await set(objectRef, newData);
-            return { errCode: 0, message: 'Object created and data added to the database' };
+            message = 'Object created and data added to the database';
         } else {
             const objectData = objectSnapshot.val();
             for (const key in newData) {
@@ -26,13 +28,21 @@ const AddIrregularVerbs = async (data) => {
                     console.log(`Data for key ${key} already exists. Skipping.`);
                 }
             }
-            return { errCode: 1, message: 'Object and keyName already exist in the database' };
+            errCode = 1;
+            message = 'Object and keyName already exist in the database';
+        }
+        return{ 
+            statusCode: 200,
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Headers": "Authorization, Content-Type"
+            },
+            body: JSON.stringify({
+                errCode: errCode, 
+                message: message
+            })
         }
     } catch (error) {
-        console.error('Error:', error);
-        return { errCode: -1, message: 'An error occurred' };
+        throw(error);
     }
-};
-
-module.exports = {AddIrregularVerbs};
-
+}

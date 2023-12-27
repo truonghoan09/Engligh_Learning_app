@@ -20,17 +20,15 @@ export const uploadAndGetURL = (file, status) => async (dispatch) => {
     }
 };
 
-export const addIrregularVerbs = (data, userId) => {
+export const addIrregularVerbs = (data) => {
 	return async (dispatch) => {
         dispatch({type: ADD_IRREGULAR_VERBS_REQUEST})
         try {
-            let response = await axios ({
+            let response = await fetch ("http://localhost:8888/.netlify/functions/addIrregularVerbs", {
                 method: 'post',
-                url: 'http://localhost:8008/api/add_irregularverbs',
-                data: {
+                body: JSON.stringify({     
                     data: data,
-                    userId: userId,
-                }
+                })
             })
             dispatch({type: ADD_IRREGULAR_VERBS_SUCCESS, payload: response.data})
         } catch (error) {
@@ -47,9 +45,10 @@ export const getDataIrregularVerbsPage = () => {
         try {
             let response = await axios ({
                 method: 'get',
-                url: 'http://localhost:8008/api/get_irregularverbs_page',
+                url: 'http://localhost:8888/.netlify/functions/getDataIrregularVerbsPage',
                 responseType: 'json',
             })
+            console.log(response);
             dispatch({type: GET_DATA_IRREGULAR_VERBS_PAGE_SUCCESS, payload: response.data, subPayload: response.subData})
         } catch (error) {
             dispatch({type: GET_DATA_IRREGULAR_VERBS_PAGE_FAILURE , error: error.message})

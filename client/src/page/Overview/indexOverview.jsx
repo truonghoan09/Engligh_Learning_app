@@ -1,7 +1,7 @@
 const Overview = () => {
     return(
         <>
-            <div>This is Overview - Lê Trường Hoan</div>
+            <div>This is Overview Layout</div>
         </>
     )
 }

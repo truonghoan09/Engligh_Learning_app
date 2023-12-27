@@ -3,3 +3,6 @@
 /.idea
 .idea/
 .env
+
+# Local Netlify folder
+.netlify
