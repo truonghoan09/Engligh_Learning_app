@@ -24,7 +24,7 @@ export const addIrregularVerbs = (data) => {
 	return async (dispatch) => {
         dispatch({type: ADD_IRREGULAR_VERBS_REQUEST})
         try {
-            let response = await fetch ("http://localhost:8888/.netlify/functions/addIrregularVerbs", {
+            let response = await fetch ("https://ubiquitous-concha-792ae6.netlify.app/.netlify/functions/addIrregularVerbs", {
                 method: 'post',
                 body: JSON.stringify({     
                     data: data,
@@ -45,7 +45,7 @@ export const getDataIrregularVerbsPage = () => {
         try {
             let response = await axios ({
                 method: 'get',
-                url: 'http://localhost:8888/.netlify/functions/getDataIrregularVerbsPage',
+                url: 'https://ubiquitous-concha-792ae6.netlify.app/.netlify/functions/getDataIrregularVerbsPage',
                 responseType: 'json',
             })
             console.log(response);
